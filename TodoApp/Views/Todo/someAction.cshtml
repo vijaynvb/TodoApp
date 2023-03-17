@@ -1,0 +1,46 @@
+﻿
+@model SomeActionViewModel;
+<h1>Hello, welcome @ViewData["Name"]</h1>
+
+<p> you department is @ViewBag.Department</p>
+
+<p> Employee name is @Model.todo.Title</p>
+
+
+
+<!-- in views we can write two types c sharp syntax
+// inline syntax-->
+@Model.user
+
+@{
+    var a = 10;
+    var b = 20;
+    var c = a + b;
+    var email = "vijay@cognixia.com";
+}
+
+<p> sum of @@a = @a and @@b = @b  values is @c</p>
+<p> sum is @(a + b) </p>
+
+<a href="www.google.com">Click Me</a>
+
+<!--HTML Helpers-->
+@Html.ActionLink("Click Me C#", "GetAllTodos");
+
+<br/>
+<!--Tag helpers-->
+<a class="anchorView" asp-controller="Todo" asp-action="GetAllTodos" >Click Me Tag Helpers</a>
+
+@section Scripts{
+    <script>
+        // javascript code 
+      let a = 10;
+      let b = 20;
+      let c= a+b;
+      alert("Sum is ="+ c);
+    </script>
+}
+
+@section Styles{
+    <link rel="stylesheet" href="~/css/custom.css" />
+}

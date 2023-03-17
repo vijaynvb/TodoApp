@@ -1,0 +1,34 @@
+﻿@model Todo
+
+<!--Palin HTML Code-->
+<form method="post" action="/todo/add" > <!-- need of form element in HTML 5-->
+    <lable>Todo Id</lable> : <span> 1</span> <br/>
+    <lable>Title</lable> : <span> Learn C#</span><br/>
+    <lable>Description</lable> : <span> Become expert in C#</span><br/>
+    <lable>Status</lable> : <span> False</span><br/>
+    <button type="submit">Send</button>
+</form>
+<br/>
+
+<!--Tag Helper-->
+<h1> Tag helpers</h1>
+<form method="post" asp-action="Add" asp-controller="Todo" > <!-- need of form element in HTML 5-->
+    <div>
+        <label asp-for ="Id"></label> <!--Todo ID-->
+        <input asp-for="Id"/> 
+    </div>
+    <div>
+        <label asp-for="Title"></label>
+        <input asp-for="Title"/> 
+    </div>
+    <div>
+        <label asp-for="Description"></label>
+        <input asp-for="Description"/> 
+    </div>
+
+    <button type="submit">Send</button>
+</form>
+
+<!-- form helpers-->
+
+<!-- templates-->

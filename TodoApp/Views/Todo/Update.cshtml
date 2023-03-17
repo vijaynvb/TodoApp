@@ -1,0 +1,29 @@
+﻿@model Todo 
+
+<h1> Update Todo</h1>
+
+<form method="post" asp-action="Update" asp-controller="Todo" > <!-- need of form element in HTML 5-->
+   
+    <div>
+        <label asp-for="Id"></label>
+        <input asp-for="Id" readonly/> 
+    </div>
+    <div>
+        <label asp-for="Title"></label>
+        <input asp-for="Title"/> 
+    </div>
+    <div>
+        <label asp-for="Description"></label>
+        <input asp-for="Description"/> 
+    </div>
+     <div>
+        <label asp-for="Status"></label>
+        <input asp-for="Status"/> 
+    </div>
+     <div>
+        <label asp-for="DueDate"></label>
+        <input asp-for="DueDate"/> 
+    </div>
+
+    <button type="submit">Update</button>
+</form>
