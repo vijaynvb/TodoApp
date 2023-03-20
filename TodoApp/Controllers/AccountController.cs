@@ -52,5 +52,33 @@ namespace TodoApp.Controllers
             }
             return View(userViewModel);
         }
+
+        [HttpGet]
+        public IActionResult Login()
+        {
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> Login(LoginUserViewModel userViewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = await _signInManager.PasswordSignInAsync(userViewModel.UserName, userViewModel.Password, userViewModel.RememberMe, false);
+                //login cookie and transfter to the client 
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("GetAllTodos", "Todo");
+                }
+                ModelState.AddModelError(string.Empty, "invalid login credentials");
+            }
+            return View(userViewModel);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Logout()
+        {
+            await _signInManager.SignOutAsync();
+            return RedirectToAction("Login");
+        }
     }
 }
