@@ -1,0 +1,16 @@
+﻿@model RoleViewModel
+
+<h1> Create Role</h1>
+
+<!-- Model oninvalid errors to be displayed --> 
+
+<form method="post" asp-action="Create" asp-controller="Role" > <!-- need of form element in HTML 5-->
+   <div asp-validation-summary="All" class="text-danger" ></div>
+    <div>
+        <label asp-for="Name"></label>
+        <input asp-for="Name"/> 
+        <span asp-validation-for="Id" class="text-danger"></span>
+    </div>
+    </div>
+    <button type="submit">Create</button>
+</form>

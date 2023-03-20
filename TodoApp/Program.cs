@@ -57,11 +57,13 @@ app.UseRouting();
 
 app.UseAuthentication(); // this would enable the identity framework for having login register all other pages 
 
+app.UseAuthorization();
+
 // it identifes the controllers folder list a set of url which it can prepare 
 // /home
 // /todo/GetAllTodos
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Todo}/{action=GetAllTodos}/{id?}");
+    pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();

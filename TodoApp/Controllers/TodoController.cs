@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using TodoApp.Models;
 using TodoApp.Repository;
 using TodoApp.Repository.InMemory;
@@ -7,6 +8,7 @@ using TodoApp.ViewModels;
 
 namespace TodoApp.Controllers
 {
+    [Authorize]
     public class TodoController : Controller
     {
         // inmemory
