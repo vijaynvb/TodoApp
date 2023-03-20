@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using TodoApp.Data;
+using TodoApp.Models;
 using TodoApp.Repository;
 using TodoApp.Repository.InMemory;
 using TodoApp.Repository.MsSQL;
@@ -13,7 +14,7 @@ builder.Services.AddControllersWithViews(); // Validation framework, DI asp.net 
 // configure asp.net the ef library to connect for a db
 builder.Services.AddDbContext<TodoDbContext>();
 // configure identity framework 
-builder.Services.AddIdentity<IdentityUser, IdentityRole>()
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
     .AddEntityFrameworkStores<TodoDbContext>();
 
 // DI object is configured by a constructor inject the object defined here 
@@ -44,7 +45,7 @@ app.Automigrate();
 
 app.UseRouting();
 
-app.UseAuthorization();
+app.UseAuthentication(); // this would enable the identity framework for having login register all other pages 
 
 // it identifes the controllers folder list a set of url which it can prepare 
 // /home

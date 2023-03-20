@@ -5,7 +5,7 @@ using TodoApp.Models;
 
 namespace TodoApp.Data
 {
-    public class TodoDbContext : IdentityDbContext 
+    public class TodoDbContext : IdentityDbContext<ApplicationUser>
     {
         // define the database and structure of the database will be managed over here
 
