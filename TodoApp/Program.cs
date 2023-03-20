@@ -16,6 +16,16 @@ builder.Services.AddDbContext<TodoDbContext>();
 // configure identity framework 
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
     .AddEntityFrameworkStores<TodoDbContext>();
+builder.Services.Configure<IdentityOptions>(options =>
+{
+    options.Password.RequiredLength = 1;
+    options.Password.RequireNonAlphanumeric = false;
+    options.Password.RequireDigit = false;
+    options.Password.RequiredUniqueChars = 0;
+    options.Password.RequireLowercase = false;
+    options.Password.RequireUppercase = false;
+});
+
 
 // DI object is configured by a constructor inject the object defined here 
 builder.Services.AddScoped<TodoDbContext, TodoDbContext>();

@@ -9,6 +9,8 @@
 <h1>Register User</h1>
 
 <form asp-controller="Account" asp-action="Register" method="post">
+    <div asp-validation-summary="All" class="text-danger" >
+    </div>
     <div>
         <label asp-for="FirstName"></label>
         <input asp-for="FirstName"/>
