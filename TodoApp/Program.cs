@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using TodoApp.Data;
 using TodoApp.Repository;
@@ -11,6 +12,9 @@ builder.Services.AddControllersWithViews(); // Validation framework, DI asp.net 
 
 // configure asp.net the ef library to connect for a db
 builder.Services.AddDbContext<TodoDbContext>();
+// configure identity framework 
+builder.Services.AddIdentity<IdentityUser, IdentityRole>()
+    .AddEntityFrameworkStores<TodoDbContext>();
 
 // DI object is configured by a constructor inject the object defined here 
 builder.Services.AddScoped<TodoDbContext, TodoDbContext>();

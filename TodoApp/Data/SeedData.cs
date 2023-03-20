@@ -7,13 +7,13 @@ namespace TodoApp.Data
     {
         public static void SeedDefaultData(this ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<User>().HasData(
+           /* modelBuilder.Entity<User>().HasData(
                 new User
                 {
                     Name = "Administrator",
                     Id = 1,
                     DOB = DateTime.Now.AddYears(-20)
-                });
+                });*/
 
             modelBuilder.Entity<Todo>().HasData(
                 new Todo(1, "Shopping", "For Birthday", false, DateTime.Now.AddDays(1)),

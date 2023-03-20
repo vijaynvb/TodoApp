@@ -8,12 +8,12 @@ namespace TodoApp.Data.ModeTableMapping
         // extension methods -> syntax
         public static void UserModel(this ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<User>()
+/*            modelBuilder.Entity<User>()
                .ToTable("People")
                .Property("Name")
                .HasColumnName("First_Name")
                .HasColumnType("ntext");
-            modelBuilder.Entity<User>().Ignore(u => u.Age);
+            modelBuilder.Entity<User>().Ignore(u => u.Age);*/
 
         }
 

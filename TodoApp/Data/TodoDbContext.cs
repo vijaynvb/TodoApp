@@ -1,10 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using TodoApp.Data.ModeTableMapping;
 using TodoApp.Models;
 
 namespace TodoApp.Data
 {
-    public class TodoDbContext : DbContext 
+    public class TodoDbContext : IdentityDbContext 
     {
         // define the database and structure of the database will be managed over here
 
@@ -41,6 +42,6 @@ namespace TodoApp.Data
         // tables in db and entites in application mapping 
         public DbSet<Todo> Todos { get; set; } // plural many
 
-        public DbSet<User> Users { get; set; }
+        //public DbSet<User> Users { get; set; }
     }
 }
