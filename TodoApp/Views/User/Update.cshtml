@@ -1,0 +1,58 @@
+﻿@model EditUserViewModel
+
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<h1>Register User</h1>
+
+<form asp-controller="User" asp-action="Update" method="post">
+    <div asp-validation-summary="All" class="text-danger" >
+    </div>
+    <div>
+        <label asp-for="FirstName"></label>
+        <input asp-for="FirstName"/>
+        <span asp-validation-for="FirstName"></span>
+    </div>
+    <div>
+        <label asp-for="LastName"></label>
+        <input asp-for="LastName"/>
+        <span asp-validation-for="LastName"></span>
+    </div>
+    <div>
+        <label asp-for="Email"></label>
+        <input asp-for="Email"/>
+        <span asp-validation-for="Email"></span>
+    </div>
+    <div>
+        <div class="card" style="width: 18rem;">
+            <div class="card-header">
+                <h4>User Roles</h4>
+            </div>
+            <div class="card-body">
+              <ul class="list-group list-group-flush">
+                  @if(Model.Roles.Any())
+                    {
+                        foreach (var role in Model.Roles)
+                        {
+                            // manage roles for user
+                            <li class="list-group-item">@role</li>
+                        }
+                    }
+                    else
+                    {
+                        <h6>No roles</h6>
+                    }
+             </ul>
+             <a asp-action="ManageRoles" asp-controller="User" asp-route-userId="Id" >Manage roles</a>
+          </div>
+        </div>
+    </div>
+    <div>
+        <a asp-action="ChangePassword" asp-controller="User" asp-route-userId="Id">Change Password</a>
+    </div>
+
+    <button type="submit">Register</button>
+</form>
