@@ -28,7 +28,7 @@ namespace TodoApp.Controllers
         {
             this._repo = repo;
         }
-        [AllowAnonymous]
+        // [AllowAnonymous]
         public IActionResult GetAllTodos()
         {
             var todolist = _repo.GetAllTodos();
