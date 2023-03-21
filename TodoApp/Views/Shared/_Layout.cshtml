@@ -32,31 +32,35 @@
                          <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Todo" asp-action="GetAllTodos">Todo</a>
                         </li>
-                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="GetAllUsers">Users</a>
-                        </li>
-                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Role" asp-action="GetAllRoles">Role</a>
-                        </li>
-                        @if(_signInManager.IsSignedIn(User))
+                        @if (_signInManager.IsSignedIn(User) && User.IsInRole("Administrator"))
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Logout">logout @User.Identity.Name </a>
-                            </li>   
-                        }
-                        else
-                        {
-                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Register">Register</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="GetAllUsers">Users</a>
                             </li>
-                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Login">login</a>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Role" asp-action="GetAllRoles">Role</a>
                             </li>
                         }
-                        
-                         
-                        
                     </ul>
+                    <ul class="nav navbar-nav my-2 my-lg-0">
+@*                      <li class="nav-item"><a class="nav-link" href="new_user"><i class="fas fa-user"></i> Sign Up</a></li>
+                      <li class="nav-item"><a class="nav-link" href="login"><i class="fas fa-sign-in-alt"></i> Login</a></li>
+   *@                       @if(_signInManager.IsSignedIn(User))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Logout">logout @User.Identity.Name </a>
+                                </li>   
+                            }
+                            else
+                            {
+                                 <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Register">Register</a>
+                                </li>
+                                 <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Login">login</a>
+                                </li>
+                            }
+                   </ul>
                 </div>
             </div>
         </nav>

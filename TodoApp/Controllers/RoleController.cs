@@ -5,7 +5,7 @@ using TodoApp.ViewModels;
 
 namespace TodoApp.Controllers
 {
-    [Authorize()]
+    [Authorize(Roles = "Administrator")]
     public class RoleController : Controller
     {
         // model? 

@@ -9,7 +9,7 @@ using TodoApp.ViewModels;
 
 namespace TodoApp.Controllers
 {
-    [Authorize()]
+    [Authorize(Roles ="Administrator")]
     public class UserController : Controller
     {
         private UserManager<ApplicationUser> _userManager { get; }
@@ -17,7 +17,7 @@ namespace TodoApp.Controllers
         {
             _userManager = userManager;
         }
-        [AllowAnonymous]
+       // [AllowAnonymous]
         public IActionResult GetAllUsers()
         {
             var userlist = _userManager.Users.ToList();
