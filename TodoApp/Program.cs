@@ -57,7 +57,8 @@ app.UseRouting();
 
 app.UseAuthentication(); // this would enable the identity framework for having login register all other pages 
 
-app.UseAuthorization();
+app.UseAuthorization(); // process the roles and claims 
+// inbuilt object of identity framework [Principal] -> who is the user and what is his role and claims 
 
 // it identifes the controllers folder list a set of url which it can prepare 
 // /home

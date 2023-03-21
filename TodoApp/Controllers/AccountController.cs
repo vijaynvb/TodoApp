@@ -13,11 +13,15 @@ namespace TodoApp.Controllers
         private UserManager<ApplicationUser> _userManager { get; }
         // login user details 
         private SignInManager<ApplicationUser> _signInManager { get; }
+        public RoleManager<IdentityRole> _roleManager { get; }
+
         public AccountController(UserManager<ApplicationUser> userManager, 
-                                SignInManager<ApplicationUser> signInManager)
+                                SignInManager<ApplicationUser> signInManager,
+                                RoleManager<IdentityRole> roleManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _roleManager = roleManager;
         }
 
         [HttpGet]
@@ -40,6 +44,19 @@ namespace TodoApp.Controllers
                 var result = await _userManager.CreateAsync(userModel, userViewModel.Password);
                 if (result.Succeeded)
                 {
+                    // add roles to it and allow him to login
+                    //var roles = _roleManager.Roles.ToList();
+                    var role = _roleManager.Roles.FirstOrDefault(r => r.Name == "User");
+                    if (role != null)
+                    {
+                        //var roleResult = await _userManager.AddToRolesAsync(userModel, roles.Select(s => s.Name).ToList());
+                        var roleResult = await _userManager.AddToRoleAsync(userModel, role.Name);
+                        if (!roleResult.Succeeded)
+                        {
+                            ModelState.AddModelError(String.Empty, "User Role cannot be assigned");
+                        }
+                    }
+          
                     // login the user automatically
                     await _signInManager.SignInAsync(userModel, isPersistent: false);
                     return RedirectToAction("GetAllTodos", "Todo");
@@ -63,6 +80,7 @@ namespace TodoApp.Controllers
         {
             if (ModelState.IsValid)
             {
+                // login activity -> cookie [Roles and Claims]
                 var result = await _signInManager.PasswordSignInAsync(userViewModel.UserName, userViewModel.Password, userViewModel.RememberMe, false);
                 //login cookie and transfter to the client 
                 if (result.Succeeded)

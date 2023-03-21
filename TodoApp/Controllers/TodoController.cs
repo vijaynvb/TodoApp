@@ -8,7 +8,7 @@ using TodoApp.ViewModels;
 
 namespace TodoApp.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Administrator, User" )]
     public class TodoController : Controller
     {
         // inmemory
@@ -28,7 +28,7 @@ namespace TodoApp.Controllers
         {
             this._repo = repo;
         }
-
+        [AllowAnonymous]
         public IActionResult GetAllTodos()
         {
             var todolist = _repo.GetAllTodos();

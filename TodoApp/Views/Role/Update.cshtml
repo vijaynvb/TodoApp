@@ -1,0 +1,17 @@
+﻿@model IdentityRole 
+
+<h1> Update Todo</h1>
+
+<form method="post" asp-action="Update" asp-controller="Role" > <!-- need of form element in HTML 5-->
+   <div asp-validation-summary="All" class="danger-text"></div>
+    <div>
+        <label asp-for="Id"></label>
+        <input asp-for="Id" readonly/> 
+    </div>
+    <div>
+        <label asp-for="Name"></label>
+        <input asp-for="Name"/> 
+    </div>
+   
+    <button type="submit">Update</button>
+</form>
