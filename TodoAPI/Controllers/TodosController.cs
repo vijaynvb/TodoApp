@@ -7,10 +7,9 @@ namespace TodoAPI.Controllers
 {
     [Route("api/v1/[controller]")]
     [ApiController]
-    public class TodosController : ControllerBase
+    public class TodosController : ControllerBase // json xml, controllers views
     {
         TodoInMemoryRepository _repo = new TodoInMemoryRepository();
-
         [HttpGet]
         public IActionResult GetAll()
         {
@@ -19,16 +18,24 @@ namespace TodoAPI.Controllers
             return Ok(_repo.GetAllTodos()); // json or xml
         }
 
-        [HttpGet("todoId")]
+        [HttpGet("{todoId}")]
         public IActionResult GetById([FromRoute] int todoId) // model binding 
         {
-            var todo = _repo.GetTodoById(todoId);
-            if (todo == null)
-                return BadRequest("No resource found");
-            return Ok(todo); // json or xml
+            Todo todo;
+            try
+            {
+                todo = _repo.GetTodoById(todoId);
+                if (todo == null)
+                    return NotFound("No resource found"); // 404
+            }
+            catch(Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+            return Ok(todo); // json or xml 200 ok
         }
 
-        [HttpDelete("todoId")]
+        [HttpDelete("{todoId}")]
         public IActionResult Delete([FromRoute] int todoId) // model binding 
         {
             var todo = _repo.GetTodoById(todoId);
@@ -44,7 +51,10 @@ namespace TodoAPI.Controllers
                 return BadRequest("No resource found");
             if (ModelState.IsValid)
             {
-                return Ok(_repo.AddTodo(todo)); // json or xml
+                var newtodo = _repo.AddTodo(todo);
+                // return the url for it
+                return Ok(newtodo);
+                //return CreatedAtAction("GetById",new { todoId = newtodo.Id },null); // json or xml
             }
             return BadRequest(ModelState);
         }

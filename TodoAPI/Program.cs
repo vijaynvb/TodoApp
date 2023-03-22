@@ -16,7 +16,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI(); // swagger editor to show the action urls for each operation
 }
 
-
+// maps you contrllers actions as urls
 app.MapControllers();
 
 app.Run();
