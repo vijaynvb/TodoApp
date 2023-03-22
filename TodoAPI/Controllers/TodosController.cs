@@ -21,12 +21,14 @@ namespace TodoAPI.Controllers
         [HttpGet("{todoId}")]
         public IActionResult GetById([FromRoute] int todoId) // model binding 
         {
+            if(todoId == 0)
+                return BadRequest();
             Todo todo;
             try
             {
                 todo = _repo.GetTodoById(todoId);
                 if (todo == null)
-                    return NotFound("No resource found"); // 404
+                    return NoContent(); // 404 NotFound, NoContent 204 -> success message with no content 
             }
             catch(Exception ex)
             {
@@ -38,22 +40,24 @@ namespace TodoAPI.Controllers
         [HttpDelete("{todoId}")]
         public IActionResult Delete([FromRoute] int todoId) // model binding 
         {
+            if (todoId == 0)
+                return BadRequest();
             var todo = _repo.GetTodoById(todoId);
             if (todo == null)
-                return BadRequest("No resource found");
-            return Ok(_repo.DeleteTodo(todoId)); // json or xml
+                return NotFound("No resource found");
+            return Accepted(_repo.DeleteTodo(todoId)); // json or xml
         }
 
         [HttpPost]
         public IActionResult AddTodo([FromBody] Todo todo) // model binding // validation
         {
             if (todo == null)
-                return BadRequest("No resource found");
+                return BadRequest("No data provided");
             if (ModelState.IsValid)
             {
                 var newtodo = _repo.AddTodo(todo);
                 // return the url for it
-                return Ok(newtodo);
+                return CreatedAtAction("GetById", new {todoId = newtodo.Id}, newtodo);
                 //return CreatedAtAction("GetById",new { todoId = newtodo.Id },null); // json or xml
             }
             return BadRequest(ModelState);
@@ -63,10 +67,11 @@ namespace TodoAPI.Controllers
         public IActionResult UpdateTodo([FromBody] Todo todo, [FromRoute] int todoId) // model binding // validation
         {
             if (todo == null)
-                return BadRequest("No resource found");
+                return BadRequest("No data provided");
             if (ModelState.IsValid)
             {
-                return Ok(_repo.UpdateTodo(todoId, todo)); // json or xml
+                var updatedTodo = _repo.UpdateTodo(todoId, todo);
+                return AcceptedAtAction("GetById", new { todoId = updatedTodo.Id }, updatedTodo); // json or xml
             }
             return BadRequest(ModelState);
         }
