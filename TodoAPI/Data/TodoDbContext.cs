@@ -6,10 +6,16 @@ namespace TodoAPI.Data
 {
     public class TodoDbContext : IdentityDbContext<ApplicationUser>
     {
+        public IConfiguration _appConfig { get; }
+        public TodoDbContext(IConfiguration appConfig)
+        {
+            _appConfig = appConfig;
+        }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            
-            string connectionString = @"Server=(localdb)\MSSQLLocalDB;Database=TodoDB;Integrated Security=True;";
+            var server = _appConfig.GetConnectionString("Server");
+            var db = _appConfig.GetConnectionString("DB");
+            string connectionString = $"Server={server};Database={db};Integrated Security=True;";
             optionsBuilder.UseSqlServer(connectionString)
                 .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking); 
 
