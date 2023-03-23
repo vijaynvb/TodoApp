@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TodoAPI.DTO;
@@ -8,6 +9,7 @@ using TodoAPI.Repository.InMemory;
 
 namespace TodoAPI.Controllers
 {
+    [Authorize]
     [Route("api/v1/[controller]")]
     [ApiController]
     public class TodosController : ControllerBase // json xml, controllers views

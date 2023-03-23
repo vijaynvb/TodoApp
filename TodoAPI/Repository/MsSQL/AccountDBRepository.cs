@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using TodoAPI.DTO;
 using TodoAPI.Models;
 
 namespace TodoAPI.Repository.MsSQL
@@ -6,9 +7,13 @@ namespace TodoAPI.Repository.MsSQL
     public class AccountDBRepository : IAccountRepository
     {
         public UserManager<ApplicationUser> _userManager { get; }
-        public AccountDBRepository(UserManager<ApplicationUser> userManager)
+        public SignInManager<ApplicationUser> _signInManager { get; }
+
+        public AccountDBRepository(UserManager<ApplicationUser> userManager,
+                                   SignInManager<ApplicationUser> signInManager)
         {
             _userManager = userManager;
+            _signInManager = signInManager;
         }
         public async Task<ApplicationUser> SignUpUserAsync(ApplicationUser user, string password)
         {
@@ -16,6 +21,18 @@ namespace TodoAPI.Repository.MsSQL
             if (newUser.Succeeded)
                 return user;
             return null;
+        }
+
+        public async Task<SignInResult> SignInUserAsync(LoginDTO loginDTO)
+        {
+            var loginResult = await _signInManager.PasswordSignInAsync(loginDTO.UserName, loginDTO.Password, loginDTO.RememberMe, false);
+            return loginResult;
+        }
+
+        public async Task<ApplicationUser> FindUserByEmailAsync(string email)
+        {
+            var user = await _userManager.FindByEmailAsync(email);
+            return user;
         }
     }
 }
