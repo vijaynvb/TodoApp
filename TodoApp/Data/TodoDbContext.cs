@@ -7,6 +7,14 @@ namespace TodoApp.Data
 {
     public class TodoDbContext : IdentityDbContext<ApplicationUser>
     {
+        public IConfiguration _appConfig { get; }
+        public ILogger _logger { get; }
+
+        public TodoDbContext(IConfiguration appConfig, ILogger<TodoDbContext> logger)
+        {
+            _appConfig = appConfig;
+            _logger = logger;
+        }
         // define the database and structure of the database will be managed over here
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -21,9 +29,17 @@ namespace TodoApp.Data
              * 3. database name - TodoDB
              */
 
-            string connectionString = @"Server=(localdb)\MSSQLLocalDB;Database=TodoDB;Integrated Security=True;";
+            var server = _appConfig.GetConnectionString("Server");
+            var db = _appConfig.GetConnectionString("DB");
+            var userName = _appConfig.GetConnectionString("UserName");
+            var password = _appConfig.GetConnectionString("Password");
+            string connectionString = $"Server={server};Database={db};User Id={userName};Password={password};MultipleActiveResultSets=true";
+
+            // log over here 
+            _logger.LogInformation("Db Connection string: " + connectionString);
+
             optionsBuilder.UseSqlServer(connectionString)
-                .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking); 
+                .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
 
             base.OnConfiguring(optionsBuilder);
         }

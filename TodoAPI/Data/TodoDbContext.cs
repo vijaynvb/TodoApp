@@ -15,7 +15,9 @@ namespace TodoAPI.Data
         {
             var server = _appConfig.GetConnectionString("Server");
             var db = _appConfig.GetConnectionString("DB");
-            string connectionString = $"Server={server};Database={db};Integrated Security=True;";
+            var userName = _appConfig.GetConnectionString("UserName");
+            var password = _appConfig.GetConnectionString("Password");
+            string connectionString = $"Server={server};Database={db};User Id= {userName};Password={password};MultipleActiveResultSets=true";
             optionsBuilder.UseSqlServer(connectionString)
                 .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking); 
 
