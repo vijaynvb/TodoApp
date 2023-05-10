@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TodoApp.Data;
 
@@ -11,9 +12,10 @@ using TodoApp.Data;
 namespace TodoApp.Migrations
 {
     [DbContext(typeof(TodoDbContext))]
-    partial class TodoDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230509065050_intermediatemigration")]
+    partial class intermediatemigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -262,7 +264,7 @@ namespace TodoApp.Migrations
                         {
                             Id = 1,
                             Description = "For Birthday",
-                            DueDate = new DateTime(2023, 5, 10, 12, 58, 11, 850, DateTimeKind.Local).AddTicks(5592),
+                            DueDate = new DateTime(2023, 5, 10, 12, 20, 50, 187, DateTimeKind.Local).AddTicks(7310),
                             Status = false,
                             Title = "Shopping"
                         },
@@ -270,7 +272,7 @@ namespace TodoApp.Migrations
                         {
                             Id = 2,
                             Description = "In Jump Trainin",
-                            DueDate = new DateTime(2023, 5, 11, 12, 58, 11, 850, DateTimeKind.Local).AddTicks(5617),
+                            DueDate = new DateTime(2023, 5, 11, 12, 20, 50, 187, DateTimeKind.Local).AddTicks(7329),
                             Status = false,
                             Title = "Learn C#"
                         },
@@ -278,7 +280,7 @@ namespace TodoApp.Migrations
                         {
                             Id = 3,
                             Description = "In Jump Trainin",
-                            DueDate = new DateTime(2023, 5, 11, 12, 58, 11, 850, DateTimeKind.Local).AddTicks(5619),
+                            DueDate = new DateTime(2023, 5, 11, 12, 20, 50, 187, DateTimeKind.Local).AddTicks(7331),
                             Status = false,
                             Title = "Learn MSSQL"
                         });
