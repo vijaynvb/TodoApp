@@ -55,12 +55,17 @@ namespace TodoApp.Controllers
                         {
                             ModelState.AddModelError(String.Empty, "User Role cannot be assigned");
                         }
+                        else
+                        {
+                            // login the user automatically
+                            await _signInManager.SignInAsync(userModel, isPersistent: false);
+                            return RedirectToAction("GetAllTodos", "Todo");
+                        }
                     }
-          
-                    // login the user automatically
-                    await _signInManager.SignInAsync(userModel, isPersistent: false);
-                    return RedirectToAction("GetAllTodos", "Todo");
-
+                    else
+                    {
+                        ModelState.AddModelError(String.Empty, "User Role does not exists");
+                    }
                 }
                 foreach(var error in result.Errors)
                 {

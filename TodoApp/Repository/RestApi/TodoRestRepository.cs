@@ -1,7 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using System.Text;
-using TodoApp.Data;
 using TodoApp.Models;
 using TodoApp.ViewModels;
 
