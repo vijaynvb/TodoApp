@@ -6,6 +6,7 @@ using TodoAPI.DTO;
 using TodoAPI.Models;
 using TodoAPI.Repository;
 using TodoAPI.Repository.InMemory;
+using TestSelenium;
 
 namespace TodoAPI.Controllers
 {
@@ -20,7 +21,9 @@ namespace TodoAPI.Controllers
         public TodosController(ITodoRepository todoRepository,
                                IMapper mapper)
         {
-            _repo=todoRepository;
+            string str = "Hello World";
+           
+            _repo = todoRepository;
             _mapper = mapper;
         }
 
@@ -35,7 +38,7 @@ namespace TodoAPI.Controllers
         [HttpGet("{todoId}")]
         public IActionResult GetById([FromRoute] int todoId) // model binding 
         {
-            if(todoId == 0)
+            if (todoId == 0)
                 return BadRequest();
             Todo todo;
             try
@@ -44,7 +47,7 @@ namespace TodoAPI.Controllers
                 if (todo == null)
                     return NoContent(); // 404 NotFound, NoContent 204 -> success message with no content 
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return StatusCode(500, ex.Message);
             }
@@ -84,7 +87,7 @@ namespace TodoAPI.Controllers
 
                 var newtodo = _repo.AddTodo(todo);
                 // return the url for it
-                return CreatedAtAction("GetById", new {todoId = newtodo.Id}, newtodo);
+                return CreatedAtAction("GetById", new { todoId = newtodo.Id }, newtodo);
                 //return CreatedAtAction("GetById",new { todoId = newtodo.Id },null); // json or xml
             }
             return BadRequest(ModelState);
