@@ -1,0 +1,40 @@
+﻿<locators>
+
+	<NewCarPage>
+		<bmwcar>
+			<LocatorType>LINK</LocatorType>
+			<LocatorValue>BMW</LocatorValue>
+		</bmwcar>
+		<toyotacar>
+			<LocatorType>LINK</LocatorType>
+			<LocatorValue>Toyota</LocatorValue>
+		</toyotacar>
+		<audicar>
+			<LocatorType>LINK</LocatorType>
+			<LocatorValue>Audi</LocatorValue>
+		</audicar>
+		<kiacar>
+			<LocatorType>LINK</LocatorType>
+			<LocatorValue>Kia</LocatorValue>
+		</kiacar>
+	</NewCarPage>
+
+
+	<CarBase>
+		<cartitle>
+			<LocatorType>XPATH</LocatorType>
+			<LocatorValue>//*[@id="root"]//h1</LocatorValue>
+		</cartitle>
+		<carname>
+			<LocatorType>XPATH</LocatorType>
+			<LocatorValue>//div/div/div/div/a/h3</LocatorValue>
+		</carname>
+		<carprice>
+			<LocatorType>XPATH</LocatorType>
+			<LocatorValue>//div/div[3]/div/span/span[1]</LocatorValue>
+		</carprice>
+		
+	</CarBase>
+	
+
+</locators>
